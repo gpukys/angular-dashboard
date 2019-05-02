@@ -1,0 +1,72 @@
+<div class="main-container">
+  <header>
+    <div class="logo" (click)='gotoDashboard()'></div>
+    <ul class="tabgroup triple">
+      <li (click)='gotoDashboard()' [class.active]="dashboard">DASHBOARD</li>
+      <li (click)='gotoContacts()' [class.active]="contacts">CONTACTS</li>
+      <li (click)='gotoNotifications()' [class.active]="notifications">NOTIFICATIONS</li>
+    </ul>
+    <div class="inputgroup" style="margin-right: 55px;">
+      <input type="text" class="basic-input search" placeholder="Search">
+      <div class="inputgroup-append">
+        <button class="basic-button icon"><i class="fas fa-search"></i></button>
+      </div>
+    </div>
+    <div class="profile-dropdown" (click)="toggleDropdown()">
+        Jorah Mormont
+        <i class="fas fa-caret-down caretDown"></i>
+        <div *ngIf="profileDropdown" class="dropdown-content">
+          <ul>
+            <li><i class="fas fa-users"></i>Groups</li>
+            <li><i class="far fa-comments"></i>Frequently Contacted</li>
+            <li><i class="fas fa-wrench"></i>Preferences</li>
+            <li><i class="fas fa-power-off"></i>Log Out</li>
+          </ul>
+        </div>
+    </div>
+    
+  </header>
+  
+  <div class="main-content">
+      <span *ngIf='contacts'>
+        <app-user-list></app-user-list>
+      </span>
+  </div>
+
+  <footer>
+    <div class="footer-links">
+      <ul class="links">
+        <li (click)='gotoDashboard()'><a href="#">Dashboard</a></li>
+        <li (click)='gotoContacts()'><a href="#">Contacts</a></li>
+        <li (click)='gotoNotifications()'><a href="#">Notifications</a></li>
+      </ul>
+      <ul class="trademark">
+        <li>© 2018 Contactify</li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Privacy</a></li>
+      </ul>
+    </div>
+    <div class="footer-status">
+      <div class="sync">
+        <i class="fas fa-cloud-upload-alt status-icon"></i>
+        <span class="text">Last synced:<br>2018-12-03 22:40:22</span>
+        <span class="syncButton">
+          <a href=""><i class="fas fa-sync-alt"></i>Force sync</a>
+        </span>
+      </div>
+      <div class="help">
+          <i class="fas fa-stethoscope status-icon" style="width: 42.5px;"></i>
+          <span class="text">Help desk and Resolution center available:<br>I - IV 8:00-18:00, V 8:00 - 16.45</span>
+      </div>
+    </div>
+    <div class="footer-controls">
+      <ul class="controls">
+        <li><a href="#">Groups</a></li>
+        <li><a href="#">Frequently contacted</a></li>
+        <li><a href="#">Preferences</a></li>
+        <li><a href="#">Log out</a></li>
+      </ul>
+    </div>
+  </footer>
+</div>
+

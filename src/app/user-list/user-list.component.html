@@ -1,0 +1,38 @@
+<div class="main-controls">
+  <input type="text" [(ngModel)]="activeFilter.name" class="basic-input name" placeholder="Name">
+  <span class="dropdown">
+    <input [(ngModel)]="activeFilter.city" (click)="toggleCity()" readonly class="basic-input city" placeholder="City">
+    <ul *ngIf="cityDropdown" class="city-dropdown">
+      <li *ngFor="let city of cities()" (click)="setCity(city)">
+        {{city}}
+      </li>
+    </ul>
+  </span>
+  <input type="checkbox" [(ngModel)]="activeFilter.active" class="checkbox" name="showActive">
+  <label for="showActive" style="margin-right: 20px;">Show active</label>
+  <button class="transparent-button" style="width: 106px;" (click)="filterContacts()">FILTER</button>
+  <button *ngIf="activeFilter.name || activeFilter.city || activeFilter.active" class="transparent-button" style="margin-left: 20px; width: 106px;" (click)="clearFilter()">CLEAR</button>
+  <button class="addNewContact-button">ADD NEW CONTACT</button>
+</div>
+<div class="userDetail">
+  <app-user-detail *ngIf="selectedContact" [contact]="selectedContact"></app-user-detail>
+</div>
+<div class="userList">
+    <ul class="grid-controls">
+      <li (click)="changeSort('name')" [ngClass]="{'sortUp': activeSort.field == 'name' &&  activeSort.dir == 'down', 'sortDown': activeSort.field == 'name' &&  activeSort.dir == 'up'}">Name<span class="sortStatus"></span></li>
+      <li (click)="changeSort('surname')" [ngClass]="{'sortUp': activeSort.field == 'surname' &&  activeSort.dir == 'down', 'sortDown': activeSort.field == 'surname' &&  activeSort.dir == 'up'}">Surname<span class="sortStatus"></span></li>
+      <li (click)="changeSort('city')" [ngClass]="{'sortUp': activeSort.field == 'city' &&  activeSort.dir == 'down', 'sortDown': activeSort.field == 'city' &&  activeSort.dir == 'up'}">City<span class="sortStatus"></span></li>
+      <li (click)="changeSort('email')" [ngClass]="{'sortUp': activeSort.field == 'email' &&  activeSort.dir == 'down', 'sortDown': activeSort.field == 'email' &&  activeSort.dir == 'up'}">Email<span class="sortStatus"></span></li>
+      <li (click)="changeSort('phone')" [ngClass]="{'sortUp': activeSort.field == 'phone' &&  activeSort.dir == 'down', 'sortDown': activeSort.field == 'phone' &&  activeSort.dir == 'up'}">Phone<span class="sortStatus"></span></li>
+      <li>&nbsp;</li>
+    </ul>
+    <div style="height: 359px; overflow-y: auto">
+      <ul *ngFor="let contact of contacts" class="grid-user" (click)="selectContact(contact.id)">
+        <li [class.userActive]="contact.active">{{contact.name}}</li>
+        <li>{{contact.surname}}</li>
+        <li>{{contact.city}}</li>
+        <li>{{contact.email}}</li>
+        <li>{{contact.phone}}</li>
+      </ul>
+    </div>
+  </div>
